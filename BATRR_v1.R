@@ -55,7 +55,10 @@ thrash_df_2 <- data %>%
     diffAmp = abs(lagAng_acc - Ang_acc)
   ) %>% 
   na.omit() %>% 
-  summarise(Thrashes = (length(findpeaks(Ang_vel, minpeakheight = 20, minpeakdistance = 8) + length(findpeaks(-Ang_vel, minpeakheight = 20, minpeakdistance = 8))) %/% 2))
+  summarise(Thrashes = (
+    length(findpeaks(Ang_vel, minpeakheight = 20, minpeakdistance = 8)) + 
+    length(findpeaks(-Ang_vel, minpeakheight = 20, minpeakdistance = 8))
+    ) %/% 2)
 
 setDT(thrash_df_1)
 setDT(thrash_df_2)
